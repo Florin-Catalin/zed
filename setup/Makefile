@@ -1,5 +1,6 @@
-.DEFAULT_GOAL := generate
+.PHONY: all1 all clean say_hello generate clean_files
 CFLAGS=-Wall -g
+all1: say_hello generate 
 all:
 	@cc -Wall -g ex1.c -o ex1
 clean:
