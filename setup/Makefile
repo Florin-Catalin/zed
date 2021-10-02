@@ -1,15 +1,28 @@
-.PHONY: all1 all clean say_hello generate clean_files
-CFLAGS=-Wall -g
-all1: say_hello generate 
-all:
-	@cc -Wall -g ex1.c -o ex1
+#Usage:
+# make  ## Usage:
+# make        # compile all binary
+# make clean  # remove ALL binaries and objects
+
+.PHONY = all clean
+
+CC = gcc# compiler to use
+
+LINKERFLAG = -lm
+
+SRCS := $(wildcard *.c)
+BINS := $(SRCS:%.c=%)
+
+all: ${BINS}
+
+%: %.o
+	@echo "Checking.."
+	${CC} ${LINKERFLAG} $< -o $@
+
+%.o: %.c
+	@echo "Creating object.."
+	${CC} -c $<
+
 clean:
-	@rm -f ex1
-say_hello:
-	@echo "Hello World"
-generate:
-	@echo "Creating empty text files..."
-	touch file-{1..10}.txt
-clean_files:
 	@echo "Cleaning up..."
-	rm *.txt
+	rm -rvf *.o ${BINS}
+
