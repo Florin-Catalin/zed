@@ -1,7 +1,14 @@
+.DEFAULT_GOAL := generate
 CFLAGS=-Wall -g
 all:
-	cc -Wall -g ex1.c -o ex1
+	@cc -Wall -g ex1.c -o ex1
 clean:
-	rm -f ex1
+	@rm -f ex1
 say_hello:
-	echo "Hello World"
+	@echo "Hello World"
+generate:
+	@echo "Creating empty text files..."
+	touch file-{1..10}.txt
+clean_files:
+	@echo "Cleaning up..."
+	rm *.txt
